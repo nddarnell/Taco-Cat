@@ -60,17 +60,78 @@
                 <div class="col-md-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            // Call Hello World
-                            function helloWorld(){
-                                alert("Hello World");
+                            // Event listener
+
+                            document.getElementById("btnSubmit").addEventListener("click", getValues);
+
+                            // Controller Function
+                            function getValues(){
+
+
+                                document.getElementById("alert").classList.add("invisible")
+
+                                let userString = document.getElementById("userValue").value;
+
+                                isolatedString = userString.replace(/[^a-zA-Z\s]/gi, '').toLowerCase();
+                                isolatedString = isolatedString.replace(/\\/gi, '');
+
+                                let cString = checkString(isolatedString);
+
+
+                                displayString(cString, isolatedString);
+                                    
+
+                            }
+
+
+                            // Logic Function
+                            function checkString(userString){
+
+                                for (let index = 0; index < userString.length / 2; index++) {
+
+                                    if (userString[index] != userString[userString.length - 1 - index]) {
+                                        // return alert('It is not A Palindrom')
+                                        return false;
+                                    }
+
+                                }
+                                // return alert("Its a palindrome!")
+                                return true;
+                                
+                            }
+
+                            // View Function
+                            function displayString(cString, userString){
+
+                                if (cString) {
+                                    
+                                    document.getElementById("alert").classList.remove("invisible");
+                                    document.getElementById("titleMsg").innerHTML = "Well done! You have entered a Palindrome!";
+                                    document.getElementById("bodyMsg").innerHTML = `Your phrased reversed is: ${userString}`
+
+                                }else{
+
+                                    document.getElementById("alert").classList.remove("invisible");
+                                    document.getElementById("alert").classList.remove("alert-success")
+                                    document.getElementById("alert").classList.add("alert-danger")
+                                    document.getElementById("titleMsg").innerHTML = "Sorry! You did not enter a Palindrome! Try Again!";
+                                    document.getElementById("bodyMsg").innerHTML = "";
+
+                                }
+
+
                             }
                         </code>
                     </pre>
                 </div>
                 <div class="col-md-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>This app was developed with 3 main functions</p>
+                    <h5>Get Values - Controller Function</h5>
+                    <p>The GetValues function is our controller function which allows us to grab the data the user put into the input form, remove all of the non alphabetic characters and pass to our logic function.</p>
+                    <h5>Check String - Logic Function</h5>
+                    <p>The CheckString function is our logic function that loops through the entire string the user has input divide that string by two and compare the back end and front end characters to see if they match.</p>
+                    <h5>Display String - View Function</h5>
+                    <p>Our DisplayString function allows us to push the users string to the html using .innerHTML as well as change some bootstrap classes to show either a success or wrong input.</p>
                 </div>
             </div>
         </div>
